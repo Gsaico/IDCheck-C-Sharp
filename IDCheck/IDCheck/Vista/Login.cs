@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace IDCheck
+namespace IDCheck.Vista
 {
     public partial class Login : Form
     {
