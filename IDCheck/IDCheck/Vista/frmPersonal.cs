@@ -109,6 +109,8 @@ namespace IDCheck.Vista
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
+            Vista.frmImprimirFotocheck frmreportex = new Vista.frmImprimirFotocheck(txtDNI.Text);
+            frmreportex.Show();
 
         }
 
@@ -189,6 +191,8 @@ namespace IDCheck.Vista
 
                     clsPersonal = clspersonalbd.BuscarPersonalXdni(clsPersonal);
                     txtDNI.Text = clsPersonal.idpersonal;
+                    label6.Text = txtDNI.Text;
+                    label7.Text = txtDNI.Text;
                     txtNombres.Text = clsPersonal.nombres;
                     txtApellidos.Text = clsPersonal.apellidos;
                     dtpFechaNacimiento.Text = clsPersonal.fechanac;
@@ -204,6 +208,17 @@ namespace IDCheck.Vista
 
                
             }
+        }
+
+        private void txtDNI_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void frmPersonal_Load(object sender, EventArgs e)
+        {
+            txtDNI.Select();
+            txtDNI.Focus();
         }
     }
 }

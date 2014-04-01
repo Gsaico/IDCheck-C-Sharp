@@ -30,7 +30,7 @@ namespace IDCheck.Modelo
                 clsPersonalx.cargo = Convert.ToString(reader["Cargo"]);
                  
             }
-
+            cnx.Close();
             return clsPersonalx;
         }
 

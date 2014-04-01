@@ -32,12 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\MySQL\Connector NET 6.8.3\Assemblies\v4.5\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,9 +55,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion\Conexion.cs" />
+    <Compile Include="Controlador\Acceso.cs" />
+    <Compile Include="Controlador\Area.cs" />
+    <Compile Include="Controlador\EmpresaColaboradora.cs" />
     <Compile Include="Controlador\Personal.cs" />
+    <Compile Include="Controlador\Servidor.cs" />
+    <Compile Include="Controlador\TipoPersonal.cs" />
+    <Compile Include="Dataset\DSpersonal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSpersonal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Acceso_BD.cs" />
+    <Compile Include="Modelo\Area_BD.cs" />
     <Compile Include="Modelo\ConexionBD.cs" />
+    <Compile Include="Modelo\EmpresaColaboradora_BD.cs" />
     <Compile Include="Modelo\PersonalBD.cs" />
+    <Compile Include="Modelo\Servidor_BD.cs" />
+    <Compile Include="Modelo\TipoPersonal_BD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vista\frmAutorizarAcceso.cs">
@@ -59,6 +80,12 @@
     </Compile>
     <Compile Include="Vista\frmAutorizarAcceso.Designer.cs">
       <DependentUpon>frmAutorizarAcceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmImprimirFotocheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmImprimirFotocheck.Designer.cs">
+      <DependentUpon>frmImprimirFotocheck.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmPersonal.cs">
       <SubType>Form</SubType>
@@ -94,8 +121,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reportes\Report1.rdlc" />
     <EmbeddedResource Include="Vista\frmAutorizarAcceso.resx">
       <DependentUpon>frmAutorizarAcceso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmImprimirFotocheck.resx">
+      <DependentUpon>frmImprimirFotocheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmPersonal.resx">
       <DependentUpon>frmPersonal.cs</DependentUpon>
@@ -109,6 +140,18 @@
     <EmbeddedResource Include="Vista\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Controlador\arduinoverde_rojo.ino" />
+    <None Include="Dataset\DSpersonal.xsc">
+      <DependentUpon>DSpersonal.xsd</DependentUpon>
+    </None>
+    <None Include="Dataset\DSpersonal.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSpersonal.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Dataset\DSpersonal.xss">
+      <DependentUpon>DSpersonal.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,7 +165,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Controlador\scrip base de datos.sql" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\document-save-as.png" />
   </ItemGroup>
@@ -134,6 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
