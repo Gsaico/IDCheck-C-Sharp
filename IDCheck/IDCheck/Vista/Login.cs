@@ -29,11 +29,13 @@ namespace IDCheck.Vista
             }
             
             Modelo.ConexionBD cnx= new Modelo.ConexionBD();
-            
 
+            Controlador.Encriptador clsEncriptador = new Controlador.Encriptador();
+
+           
 
             // verifico si existe el usuario y la contraseña
-            if (cnx.VerificarUsuario(txtDNI.Text, txtpasword.Text) == true)
+            if (cnx.VerificarUsuario(txtDNI.Text,  clsEncriptador.EncriptarPasword(txtpasword.Text)) == true)
             {
                 
                 Vista.IDCheck nuevo = new Vista.IDCheck();

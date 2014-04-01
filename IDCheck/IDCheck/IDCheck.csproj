@@ -58,6 +58,7 @@
     <Compile Include="Controlador\Acceso.cs" />
     <Compile Include="Controlador\Area.cs" />
     <Compile Include="Controlador\EmpresaColaboradora.cs" />
+    <Compile Include="Controlador\Encriptador.cs" />
     <Compile Include="Controlador\Personal.cs" />
     <Compile Include="Controlador\Servidor.cs" />
     <Compile Include="Controlador\TipoPersonal.cs" />
