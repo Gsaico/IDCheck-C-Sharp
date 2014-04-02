@@ -12,14 +12,11 @@ using System.Windows.Forms;
 namespace IDCheck.Vista
 {
     public partial class frmRegistrodePersonal : Form
-
-
-
     {
-    private static String  Verde_OFF="0";
-    private static  String Verde_ON="1";
-    private static  String Rojo_OFF="2";
-    private static  String Rojo_ON="3"; 
+        private static String Verde_OFF = "0";
+        private static String Verde_ON = "1";
+        private static String Rojo_OFF = "2";
+        private static String Rojo_ON = "3";
 
 
 
@@ -35,7 +32,7 @@ namespace IDCheck.Vista
             {
                 serialPort1.Open();
 
-                
+
             }
             catch (Exception err)
             {
@@ -43,30 +40,26 @@ namespace IDCheck.Vista
             }
         }
 
+       // DataTable dt;
+      //  DataRow row;
         private void frmRegistrodePersonal_Load(object sender, EventArgs e)
         {
+           // dt = new DataTable();
+
+            //creas una tabla 
+          //  dt.Columns.Add("Apellido y Nombre"); //le creas las columnas 
+          //  dt.Columns.Add("DNI");
+          //  row = dt.NewRow(); //creas un registro 
+            //row["Apellido y Nombre"] = "Guille   sdfsdfsdf      sdfsdf s  sssfghdfghdfghdfghdrmo"; //Le añadres un valor 
+            //row["DNI"] = "41715787";
+            //dt.Rows.Add(row); //añades el registro a la tabla 
+          //  dataGridView1.DataSource = dt; //añades la tabla al datagrid 
+          //  dataGridView1.Update(); //actualizas 
+
 
         }
 
-        private void btnEncenderrojo_Click(object sender, EventArgs e)
-        {
-            serialPort1.Write(Rojo_ON);
-        }
-
-        private void btnApagarverde_Click(object sender, EventArgs e)
-        {
-            serialPort1.Write(Verde_OFF);
-        }
-
-        private void btnApagarRojo_Click(object sender, EventArgs e)
-        {
-            serialPort1.Write(Rojo_OFF);
-        }
-
-        private void btnEncenderverde_Click(object sender, EventArgs e)
-        {
-            serialPort1.Write(Verde_ON);
-        }
+        
 
         private void frmRegistrodePersonal_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -75,10 +68,10 @@ namespace IDCheck.Vista
                 serialPort1.Write(Rojo_OFF);
                 serialPort1.Write(Verde_OFF);
                 serialPort1.Close();  //cierro el puerto
-            
+
             }
 
-            
+
         }
 
         private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
@@ -89,7 +82,7 @@ namespace IDCheck.Vista
                 clsLogicaacceso.idacceso = txtDNI.Text;
 
                 Modelo.LogicaAcceso_BD clsLogicaAccesoBD = new Modelo.LogicaAcceso_BD();
-                clsLogicaacceso=clsLogicaAccesoBD.VerificarAutorizacion(clsLogicaacceso);
+                clsLogicaacceso = clsLogicaAccesoBD.VerificarAutorizacion(clsLogicaacceso);
 
                 if (clsLogicaacceso.dni != null)
                 {
@@ -103,111 +96,128 @@ namespace IDCheck.Vista
                     picFoto.Image = byteArrayToImage(clsLogicaacceso.foto);
 
                     // aqui verifico el estado de su pase
-                     
-                    if (clsLogicaacceso.autorizacion  == 1) {
+
+                    if (clsLogicaacceso.autorizacion == 1)
+                    {
                         serialPort1.Write(Verde_ON);
-                lblAcceso.Text="Acceso Permitido";
-                lblAcceso.ForeColor=Color.Green;
+                        lblAcceso.Text = "Acceso Permitido";
+                        lblAcceso.ForeColor = Color.Green;
 
-                    // ---> verifico el ultimo registro de ingreso y salidas
-                Controlador.Registro clsRegistro = new  Controlador.Registro();
-                clsRegistro.idAcceso = clsLogicaacceso.dni;
+                        // ---> verifico el ultimo registro de ingreso y salidas
+                        Controlador.Registro clsRegistro = new Controlador.Registro();
+                        clsRegistro.idAcceso = clsLogicaacceso.dni;
 
-                        Modelo.Registro_BD  clsRegistroBD =new  Modelo.Registro_BD();
+                        Modelo.Registro_BD clsRegistroBD = new Modelo.Registro_BD();
 
-               clsRegistro= clsRegistroBD.BuscarUltimoRegistrodeESxIDACCESO(clsRegistro);
-                // fin <---
-          
-              
-                   
-                   int estado=3;
-                   
-                   
-                   if (clsRegistro.idEstado != null) {
-
-                       estado = int.Parse(clsRegistro.idEstado);
-                   
-                   }
+                        clsRegistro = clsRegistroBD.BuscarUltimoRegistrodeESxIDACCESO(clsRegistro);
+                        // fin <---
 
 
-                   Controlador.Registro clsRegistrox = new Controlador.Registro();
-                  // Modelo.Registro_BD clsRegistroBDx = new Modelo.Registro_BD();
-                   
-                   
-                   
-                if (estado==1){
-                
-               
-                    //el personal sale de las instalaciones
-                    
 
-                clsRegistrox.idTipoPersonal = clsLogicaacceso.idTipoPersonal;
+                        int estado = 3;
 
-                clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
-                clsRegistrox.idAcceso = clsLogicaacceso.dni;
-                clsRegistrox.idEstado  ="0";
-                Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
 
-                           
-                    
-                }else if (estado==0){
-                     //el personal ingresa a las instalaciones
-                    clsRegistrox.idTipoPersonal = clsLogicaacceso.idTipoPersonal;
+                        if (clsRegistro.idEstado != null)
+                        {
 
-                    clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
-                    clsRegistrox.idAcceso = clsLogicaacceso.dni;
-                    clsRegistrox.idEstado = "1";
-                    Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
-               
-                
-                }else{
-                    clsRegistrox.idTipoPersonal = clsLogicaacceso.idTipoPersonal;
+                            estado = int.Parse(clsRegistro.idEstado);
 
-                    clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
-                    clsRegistrox.idAcceso = clsLogicaacceso.dni;
-                    clsRegistrox.idEstado = "1";
-                    Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
-                
-                    
+                        }
+
+
+                        Controlador.Registro clsRegistrox = new Controlador.Registro();
+                        // Modelo.Registro_BD clsRegistroBDx = new Modelo.Registro_BD();
+
+
+
+                        if (estado == 1)
+                        {
+
+
+                            //el personal sale de las instalaciones
+
+
+                            clsRegistrox.idTipoPersonal = clsLogicaacceso.idTipoPersonal;
+
+                            clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
+                            clsRegistrox.idAcceso = clsLogicaacceso.dni;
+                            clsRegistrox.idEstado = "0";
+                            Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+
+                            //   row["Apellido y Nombre"] = clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos; //Le añadres un valor 
+                            // row["DNI"] = clsLogicaacceso.dni;
+                            // dt.Rows.Add(row); //añades el registro a la tabla 
+                            // dataGridView1.DataSource = dt; //añades la tabla al datagrid 
+                            // dataGridView1.Update(); //actualizas 
+
+                            dataGridView1.Rows.Add(byteArrayToImage(clsLogicaacceso.foto),clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos, clsLogicaacceso.dni);
+
+
+                        }
+                        else if (estado == 0)
+                        {
+                            //el personal ingresa a las instalaciones
+                            clsRegistrox.idTipoPersonal = clsLogicaacceso.idTipoPersonal;
+
+                            clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
+                            clsRegistrox.idAcceso = clsLogicaacceso.dni;
+                            clsRegistrox.idEstado = "1";
+                            Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+
+                            dataGridView1.Rows.Add(byteArrayToImage(clsLogicaacceso.foto),clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos, clsLogicaacceso.dni);
+                        }
+                        else
+                        {
+                            clsRegistrox.idTipoPersonal = clsLogicaacceso.idTipoPersonal;
+
+                            clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
+                            clsRegistrox.idAcceso = clsLogicaacceso.dni;
+                            clsRegistrox.idEstado = "1";
+                            Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+
+                            dataGridView1.Rows.Add(byteArrayToImage(clsLogicaacceso.foto), clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos, clsLogicaacceso.dni);
+                        }
+
+
+
+
+
+
+
+
+
+
+                    }
+                    else if (clsLogicaacceso.autorizacion == 0)
+                    {
+                        serialPort1.Write(Rojo_ON);  //prender 3segundos
+                        lblAcceso.Text = "ACCESO DENEGADO";
+                        lblAcceso.ForeColor = Color.Red;
+
+                    }
+
+
+
+
+
+
+
                 }
-                
-                
-                        
-                
-                
-                
-                
-                
-                    
-                    
-            } else if (clsLogicaacceso.autorizacion == 0) {
-                serialPort1.Write(Rojo_ON);  //prender 3segundos
-                lblAcceso.Text="ACCESO DENEGADO";
-                lblAcceso.ForeColor=Color.Red;
-                    
-            }
+                else
+                {
 
-
-
-
-
-
-
-                }
-                else { 
-                
-                //no existe personal
+                    //no existe personal
                     //poner foto vacia
 
                     picFoto.Image = null;
 
-                
+
                 }
 
 
 
 
-                              
+
 
             }
 
@@ -233,5 +243,7 @@ namespace IDCheck.Vista
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
+
+        
     }
 }

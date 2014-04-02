@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtDNI = new System.Windows.Forms.TextBox();
             this.lblAcceso = new System.Windows.Forms.Label();
             this.lblApellidos = new System.Windows.Forms.Label();
             this.lblNombres = new System.Windows.Forms.Label();
@@ -38,15 +39,11 @@
             this.lblTipoPersonal = new System.Windows.Forms.Label();
             this.picFoto = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnEncenderrojo = new System.Windows.Forms.Button();
-            this.btnApagarRojo = new System.Windows.Forms.Button();
-            this.btnApagarverde = new System.Windows.Forms.Button();
-            this.btnEncenderverde = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.txtDNI = new System.Windows.Forms.TextBox();
+            this.Column3 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -68,7 +65,15 @@
             this.groupBox2.Size = new System.Drawing.Size(441, 774);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Acceso del Personal";
+            // 
+            // txtDNI
+            // 
+            this.txtDNI.Location = new System.Drawing.Point(6, 519);
+            this.txtDNI.Name = "txtDNI";
+            this.txtDNI.Size = new System.Drawing.Size(429, 20);
+            this.txtDNI.TabIndex = 14;
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // lblAcceso
             // 
@@ -154,97 +159,45 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Controls.Add(this.btnEncenderrojo);
-            this.groupBox1.Controls.Add(this.btnApagarRojo);
-            this.groupBox1.Controls.Add(this.btnApagarverde);
-            this.groupBox1.Controls.Add(this.btnEncenderverde);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(612, 774);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(29, 577);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 20);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Verde";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(29, 493);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 20);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Rojo";
+            this.groupBox1.Text = "Registro de Ingresos y Salidas";
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column3,
+            this.Column1,
+            this.Column2});
             this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(600, 413);
+            this.dataGridView1.Size = new System.Drawing.Size(600, 742);
             this.dataGridView1.TabIndex = 11;
             // 
-            // btnEncenderrojo
+            // Column3
             // 
-            this.btnEncenderrojo.Location = new System.Drawing.Point(33, 540);
-            this.btnEncenderrojo.Name = "btnEncenderrojo";
-            this.btnEncenderrojo.Size = new System.Drawing.Size(75, 23);
-            this.btnEncenderrojo.TabIndex = 7;
-            this.btnEncenderrojo.Text = "Encender";
-            this.btnEncenderrojo.UseVisualStyleBackColor = true;
-            this.btnEncenderrojo.Click += new System.EventHandler(this.btnEncenderrojo_Click);
+            this.Column3.HeaderText = "Foto";
+            this.Column3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Column3.Name = "Column3";
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // btnApagarRojo
+            // Column1
             // 
-            this.btnApagarRojo.Location = new System.Drawing.Point(114, 540);
-            this.btnApagarRojo.Name = "btnApagarRojo";
-            this.btnApagarRojo.Size = new System.Drawing.Size(75, 23);
-            this.btnApagarRojo.TabIndex = 8;
-            this.btnApagarRojo.Text = "Apagar";
-            this.btnApagarRojo.UseVisualStyleBackColor = true;
-            this.btnApagarRojo.Click += new System.EventHandler(this.btnApagarRojo_Click);
+            this.Column1.HeaderText = "Apellidos y Nombres";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 200;
             // 
-            // btnApagarverde
+            // Column2
             // 
-            this.btnApagarverde.Location = new System.Drawing.Point(114, 608);
-            this.btnApagarverde.Name = "btnApagarverde";
-            this.btnApagarverde.Size = new System.Drawing.Size(75, 23);
-            this.btnApagarverde.TabIndex = 9;
-            this.btnApagarverde.Text = "Apagar";
-            this.btnApagarverde.UseVisualStyleBackColor = true;
-            this.btnApagarverde.Click += new System.EventHandler(this.btnApagarverde_Click);
-            // 
-            // btnEncenderverde
-            // 
-            this.btnEncenderverde.Location = new System.Drawing.Point(33, 608);
-            this.btnEncenderverde.Name = "btnEncenderverde";
-            this.btnEncenderverde.Size = new System.Drawing.Size(75, 23);
-            this.btnEncenderverde.TabIndex = 10;
-            this.btnEncenderverde.Text = "Encender";
-            this.btnEncenderverde.UseVisualStyleBackColor = true;
-            this.btnEncenderverde.Click += new System.EventHandler(this.btnEncenderverde_Click);
-            // 
-            // txtDNI
-            // 
-            this.txtDNI.Location = new System.Drawing.Point(6, 519);
-            this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(429, 20);
-            this.txtDNI.TabIndex = 14;
-            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
+            this.Column2.HeaderText = "DNI";
+            this.Column2.Name = "Column2";
             // 
             // frmRegistrodePersonal
             // 
@@ -261,7 +214,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -279,13 +231,10 @@
         private System.Windows.Forms.PictureBox picFoto;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnEncenderrojo;
-        private System.Windows.Forms.Button btnApagarRojo;
-        private System.Windows.Forms.Button btnApagarverde;
-        private System.Windows.Forms.Button btnEncenderverde;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.DataGridViewImageColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }
