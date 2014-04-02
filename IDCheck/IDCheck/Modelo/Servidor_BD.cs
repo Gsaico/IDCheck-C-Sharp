@@ -15,12 +15,16 @@ namespace IDCheck.Modelo
             Controlador.Servidor clsServidorx = new Controlador.Servidor();
             MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
 
-            MySqlCommand comando = new MySqlCommand("select now() as Fechitayhora", cnx);
+            MySqlCommand comando = new MySqlCommand("select NOW() as Fechitayhora", cnx);
+
+
+            
+
             MySqlDataReader reader = comando.ExecuteReader();
 
             while (reader.Read())
             {
-                clsServidorx.datetimeservidor = Convert.ToDateTime(reader["Fechitayhora"]);
+                clsServidorx.datetimeservidor = Convert.ToString(reader["Fechitayhora"]);
                
 
             }

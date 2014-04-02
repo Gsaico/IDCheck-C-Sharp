@@ -32,9 +32,9 @@ namespace IDCheck.Vista
             Modelo.Servidor_BD clsServidor_BD = new Modelo.Servidor_BD();
 
             clsServidor = clsServidor_BD.FechayHoradelServidor();
-            lblFecha.Text = clsServidor.datetimeservidor.Year + "/" + clsServidor.datetimeservidor.Month + "/" + clsServidor.datetimeservidor.Day;
+         //   lblFecha.Text = DateTime.ToString("yyyyMMdd") ;
 
-            var dt = DateTime.Parse(lblFecha.Text);
+            var dt = DateTime.Parse(clsServidor.datetimeservidor);
             string output = dt.ToString(@"yyyy/MM/dd", CultureInfo.InvariantCulture);
             lblFecha.Text = output;
         }

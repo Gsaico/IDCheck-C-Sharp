@@ -191,8 +191,7 @@ namespace IDCheck.Vista
 
                     clsPersonal = clspersonalbd.BuscarPersonalXdni(clsPersonal);
                     txtDNI.Text = clsPersonal.idpersonal;
-                    label6.Text = txtDNI.Text;
-                    label7.Text = txtDNI.Text;
+                    
                     txtNombres.Text = clsPersonal.nombres;
                     txtApellidos.Text = clsPersonal.apellidos;
                     dtpFechaNacimiento.Text = clsPersonal.fechanac;

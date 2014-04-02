@@ -8,7 +8,7 @@ namespace IDCheck.Controlador
 {
     class Servidor
     {
-         public DateTime datetimeservidor { get; set; }
+         public String datetimeservidor { get; set; }
      
         
         public Servidor()
@@ -17,7 +17,7 @@ namespace IDCheck.Controlador
         }
 
 
-        public Servidor(DateTime Datetimeservidor)
+        public Servidor(String Datetimeservidor)
         {
             this.datetimeservidor = Datetimeservidor;
           
