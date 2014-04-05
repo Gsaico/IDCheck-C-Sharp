@@ -38,5 +38,37 @@ namespace IDCheck.Modelo
             
 
         }
+
+        public bool ExistenUsuariosAdministradores()
+        {
+
+
+            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand("select * from administrador", cnx);
+
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            reader.Read();
+            Boolean existenusuarios = reader.HasRows;
+
+            cnx.Close();
+
+            if (existenusuarios == true)
+            {
+
+                return true;
+            }
+
+            else
+            {
+
+                return false;
+            }
+
+
+
+        }
+
     }
 }

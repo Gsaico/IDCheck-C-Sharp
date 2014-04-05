@@ -11,6 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+using System.Collections;
+
+
 namespace IDCheck.Vista
 {
     public partial class frmPersonal : Form
@@ -26,7 +30,7 @@ namespace IDCheck.Vista
             Modelo.PersonalBD clspersonalbd = new Modelo.PersonalBD();
             Controlador.Personal clsPersonal = new Controlador.Personal();
 
-            if (tempfoto != null)
+            if (tempfoto != null && txtDNI.Text.Length ==8)
             {
                 if (clspersonalbd.VerificarSiExistePersonal(txtDNI.Text) == true)
                 {
@@ -43,6 +47,7 @@ namespace IDCheck.Vista
                     if (resultado > 0)
                     {
                         MessageBox.Show("La actualizacion se realizo con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiarControles();
                     }
                     else
                     {
@@ -67,6 +72,7 @@ namespace IDCheck.Vista
                     if (resultado > 0)
                     {
                         MessageBox.Show("Los datos del personal nuevo se Grabo Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiarControles();
                     }
                     else
                     {
@@ -78,7 +84,7 @@ namespace IDCheck.Vista
             else
             {
 
-                MessageBox.Show("Debe ingresar la foto del personal.", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Debe completar los datos del personal.", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             
@@ -91,10 +97,8 @@ namespace IDCheck.Vista
 
         }
 
+        void limpiarControles() {
 
-
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
             txtDNI.Text = null;
             txtNombres.Text = null;
             txtApellidos.Text = null;
@@ -103,7 +107,12 @@ namespace IDCheck.Vista
             picFoto.Image = null;
             //limpio la variable foto
             tempfoto = null;
+        }
 
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+
+            limpiarControles();
         
         }
 
@@ -160,12 +169,12 @@ namespace IDCheck.Vista
             return ms.ToArray();
         }
 
-        //Byte a imagen para picture box
         public Image byteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
+
         }
 
         private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
@@ -191,16 +200,29 @@ namespace IDCheck.Vista
 
                     clsPersonal = clspersonalbd.BuscarPersonalXdni(clsPersonal);
                     txtDNI.Text = clsPersonal.idpersonal;
-                    
+
                     txtNombres.Text = clsPersonal.nombres;
                     txtApellidos.Text = clsPersonal.apellidos;
                     dtpFechaNacimiento.Text = clsPersonal.fechanac;
                     txtcargo.Text = clsPersonal.cargo;
+
                     picFoto.Image = byteArrayToImage(clsPersonal.foto);
                     // coloca la fot en la variable temfoto para su actualizacion
-                    tempfoto = imageToByteArray(picFoto.Image); 
+                    tempfoto = imageToByteArray(picFoto.Image);
+
+                    // MemoryStream stream = new MemoryStream(clsPersonal.foto);
+                    // picFoto.Image = Image.FromStream(stream);
+
+
+
+
+
+
+
                 }
-                else {
+
+                else
+                {
 
                     MessageBox.Show(" El personal no existe en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
@@ -218,6 +240,71 @@ namespace IDCheck.Vista
         {
             txtDNI.Select();
             txtDNI.Focus();
+        }
+
+       // private void txtDNI_Validating(object sender, CancelEventArgs e)
+       // {
+           // if (txtDNI.Text.Length == 0)
+          //  {
+         //       e.Cancel = true;
+         //       this.errorProvider1.SetError(this.txtDNI, "Ingrese el DNI del Colaborador.");
+         //   }
+         //   else
+         //   {
+          //      this.errorProvider1.SetError(this.txtDNI, null);
+         //   }
+      //  }
+
+        private void txtNombres_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtNombres.Text.Length == 0)
+            {
+                e.Cancel = true;
+                this.errorProvider1.SetError(this.txtNombres, "Ingrese el Nombre del Colaborador.");
+            }
+            else
+            {
+                this.errorProvider1.SetError(this.txtNombres, null);
+            }
+        }
+
+        private void txtApellidos_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtApellidos.Text.Length == 0)
+            {
+                e.Cancel = true;
+                this.errorProvider1.SetError(this.txtApellidos, "Ingrese el Apellido del Colaborador.");
+            }
+            else
+            {
+                this.errorProvider1.SetError(this.txtApellidos, null);
+            }
+        }
+
+        private void dtpFechaNacimiento_Validating(object sender, CancelEventArgs e)
+        {
+            if (dtpFechaNacimiento.Text.Length == 0)
+            {
+                e.Cancel = true;
+                this.errorProvider1.SetError(this.dtpFechaNacimiento, "Ingrese la Fecha de Nacimiento del Colaborador. ");
+            }
+            else
+            {
+                this.errorProvider1.SetError(this.dtpFechaNacimiento, null);
+            }
+        }
+
+        private void txtcargo_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtcargo.Text.Length == 0)
+            {
+                e.Cancel = true;
+                this.errorProvider1.SetError(this.txtcargo, "Ingrese el cargo que desempeña el Colaborador. ");
+            }
+            else
+            {
+                this.errorProvider1.SetError(this.txtcargo, null);
+            }
         }
     }
 }

@@ -66,5 +66,36 @@ namespace IDCheck.Modelo
 
 
         }
+
+        public static int AgregarEmpresa(Controlador.EmpresaColaboradora clsEmpresaColaboradora)
+        {
+
+            int retorno = 0;
+            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(string.Format("INSERT INTO empresacolaboradora(NombreEmpresa, Gerente, Telefono, Email, idEmpresaColaboradora) VALUES('{0}','{1}','{2}', '{3}','{4}')",
+            clsEmpresaColaboradora.nombreEmpresa, clsEmpresaColaboradora.gerente, clsEmpresaColaboradora.telefono, clsEmpresaColaboradora.email, clsEmpresaColaboradora.idEmpresaColaboradora), cnx);
+
+            retorno = comando.ExecuteNonQuery();
+
+            cnx.Close();
+            return retorno;
+        }
+
+        public static int ActualizarDatosdEmpresa(Controlador.EmpresaColaboradora clsEmpresaColaboradora)
+        {
+            int retorno = 0;
+            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(string.Format("Update empresacolaboradora set NombreEmpresa='{0}', Gerente='{1}', Telefono='{2}', Email='{3}' where idEmpresaColaboradora={4}",
+                clsEmpresaColaboradora.nombreEmpresa, clsEmpresaColaboradora.gerente, clsEmpresaColaboradora.telefono, clsEmpresaColaboradora.email, clsEmpresaColaboradora.idEmpresaColaboradora), cnx);
+
+            retorno = comando.ExecuteNonQuery();
+            cnx.Close();
+
+            return retorno;
+
+        }
+
     }
 }

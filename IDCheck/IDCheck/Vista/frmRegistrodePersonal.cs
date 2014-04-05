@@ -42,6 +42,7 @@ namespace IDCheck.Vista
 
        // DataTable dt;
       //  DataRow row;
+        int contadorgrid;
         private void frmRegistrodePersonal_Load(object sender, EventArgs e)
         {
            // dt = new DataTable();
@@ -144,13 +145,12 @@ namespace IDCheck.Vista
                             clsRegistrox.idEstado = "0";
                             Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
 
-                            //   row["Apellido y Nombre"] = clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos; //Le añadres un valor 
-                            // row["DNI"] = clsLogicaacceso.dni;
-                            // dt.Rows.Add(row); //añades el registro a la tabla 
-                            // dataGridView1.DataSource = dt; //añades la tabla al datagrid 
-                            // dataGridView1.Update(); //actualizas 
+                      
 
-                            dataGridView1.Rows.Add(byteArrayToImage(clsLogicaacceso.foto),clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos, clsLogicaacceso.dni);
+                            contadorgrid++;
+
+                            dataGridView1.Rows.Add(contadorgrid,byteArrayToImage(clsLogicaacceso.foto),clsLogicaacceso.apellidos +" "+clsLogicaacceso.nombres, clsLogicaacceso.dni);
+                            dataGridView1.Sort(this.dataGridView1.Columns["Column4"], ListSortDirection.Descending);
 
 
                         }
@@ -164,7 +164,10 @@ namespace IDCheck.Vista
                             clsRegistrox.idEstado = "1";
                             Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
 
-                            dataGridView1.Rows.Add(byteArrayToImage(clsLogicaacceso.foto),clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos, clsLogicaacceso.dni);
+                            contadorgrid++;
+
+                            dataGridView1.Rows.Add(contadorgrid, byteArrayToImage(clsLogicaacceso.foto), clsLogicaacceso.apellidos + " " + clsLogicaacceso.nombres, clsLogicaacceso.dni);
+                            dataGridView1.Sort(this.dataGridView1.Columns["Column4"], ListSortDirection.Descending);
                         }
                         else
                         {
@@ -174,8 +177,10 @@ namespace IDCheck.Vista
                             clsRegistrox.idAcceso = clsLogicaacceso.dni;
                             clsRegistrox.idEstado = "1";
                             Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+                            contadorgrid++;
 
-                            dataGridView1.Rows.Add(byteArrayToImage(clsLogicaacceso.foto), clsLogicaacceso.nombres + " " + clsLogicaacceso.apellidos, clsLogicaacceso.dni);
+                            dataGridView1.Rows.Add(contadorgrid, byteArrayToImage(clsLogicaacceso.foto), clsLogicaacceso.apellidos + " " + clsLogicaacceso.nombres, clsLogicaacceso.dni);
+                            dataGridView1.Sort(this.dataGridView1.Columns["Column4"], ListSortDirection.Descending);
                         }
 
 
@@ -210,6 +215,12 @@ namespace IDCheck.Vista
                     //poner foto vacia
 
                     picFoto.Image = null;
+                    lblNombres.Text ="?";
+                    lblApellidos.Text = "?";
+                    lblDNI.Text = "?";
+                    lblNombreEmpresa.Text = "?";
+                    lblTipoPersonal.Text = "?";
+                   
 
 
                 }
@@ -228,13 +239,6 @@ namespace IDCheck.Vista
 
 
 
-        // image  de picture box a Byte
-        public byte[] imageToByteArray(System.Drawing.Image imageIn)
-        {
-            MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-            return ms.ToArray();
-        }
 
         //Byte a imagen para picture box
         public Image byteArrayToImage(byte[] byteArrayIn)
@@ -242,6 +246,11 @@ namespace IDCheck.Vista
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
+        }
+
+        private void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         

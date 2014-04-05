@@ -198,6 +198,11 @@ namespace IDCheck.Vista
 
                     clsAcceso.idarea = Convert.ToString(this.cmbArea.SelectedIndex+1);
                     clsAcceso.idempresacolaboradora = this.txtRUC.Text;
+
+                   // Controlador.TipoPersonal
+
+
+
                     clsAcceso.idtipopersonal = Convert.ToString(this.cmdTipoPersonal.SelectedIndex+1);
 
 
@@ -253,6 +258,13 @@ namespace IDCheck.Vista
           
 
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(cmbArea.ValueMember);
+
+           //Número = Int32.Parse(comboBox1.ValueMember);
         }
 
         

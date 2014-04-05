@@ -17,7 +17,7 @@ namespace IDCheck.Modelo
             MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
 
             MySqlCommand comando = new MySqlCommand(String.Format(
-           "SELECT idPersonal, Nombres, Apellidos, FechaNac, Foto, Cargo FROM personal WHERE idPersonal='{0}'", clsPersonal.idpersonal), cnx);
+           "SELECT idPersonal,Nombres,Apellidos,FechaNac,Foto,Cargo FROM personal WHERE idPersonal='{0}'", clsPersonal.idpersonal), cnx);
             MySqlDataReader reader = comando.ExecuteReader();
 
             while (reader.Read())
