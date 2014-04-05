@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+
 
 namespace IDCheck.Modelo
 {
@@ -14,18 +15,18 @@ namespace IDCheck.Modelo
         {
 
             Controlador.Acceso clsAccesox = new Controlador.Acceso();
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
-
-            MySqlCommand comando = new MySqlCommand(String.Format(
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
+            SqlCommand comando = new SqlCommand(String.Format(
            "SELECT idPersonal,Fecha,FechaDesde,FechaHasta,Nota,Essalud,sctrSalud,sctrPensiones,pdtplame,afp,onp,idArea,idTipoPersonal,idEmpresaColaboradora FROM acceso WHERE idPersonal='{0}'", clsAcceso.idpersonal), cnx);
-            MySqlDataReader reader = comando.ExecuteReader();
+            SqlDataReader reader = comando.ExecuteReader();
 
             while (reader.Read())
             {
                 clsAccesox.idpersonal = Convert.ToString(reader["idPersonal"]);
-                clsAccesox.fecha = Convert.ToString(reader["Fecha"]);
-                clsAccesox.fechadesde = Convert.ToString(reader["FechaDesde"]);
-                clsAccesox.fechahasta = Convert.ToString(reader["FechaHasta"]);
+                clsAccesox.fecha = Convert.ToDateTime(reader["Fecha"]);
+                clsAccesox.fechadesde = Convert.ToDateTime(reader["FechaDesde"]);
+                clsAccesox.fechahasta = Convert.ToDateTime(reader["FechaHasta"]);
                 clsAccesox.nota = Convert.ToString(reader["Nota"]);
 
                 clsAccesox.essalud = Convert.ToString(reader["Essalud"]);
@@ -40,7 +41,7 @@ namespace IDCheck.Modelo
                 clsAccesox.idempresacolaboradora = Convert.ToString(reader["idEmpresaColaboradora"]);
                 clsAccesox.idtipopersonal = Convert.ToString(reader["idTipoPersonal"]);
 
-                
+
 
             }
             cnx.Close();
@@ -48,48 +49,103 @@ namespace IDCheck.Modelo
         }
 
 
-        public static int AgregarDatosdAcceso(Controlador.Acceso clsAcceso)
+        
+
+        public static int insertardatosdeacceso(Controlador.Acceso clsAcceso)
         {
 
             int retorno = 0;
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
 
-            MySqlCommand comando = new MySqlCommand(string.Format("INSERT INTO acceso(idPersonal,Fecha,FechaDesde,FechaHasta,Nota,Essalud,sctrSalud,sctrPensiones,pdtplame,afp,onp,idArea,idTipoPersonal,idEmpresaColaboradora)"+
+            string query = "INSERT INTO acceso(idPersonal,Fecha,FechaDesde,FechaHasta,Nota,Essalud,sctrSalud,sctrPensiones,pdtplame,afp,onp,idArea,idTipoPersonal,idEmpresaColaboradora) VALUES(@idPersonal,@Fecha,@FechaDesde,@FechaHasta,@Nota,@Essalud,@sctrSalud,@sctrPensiones,@pdtplame,@afp,@onp,@idArea,@idTipoPersonal,@idEmpresaColaboradora)";
+            SqlCommand cmd = new SqlCommand(query, cnx);
+         
+            cmd.Parameters.AddWithValue("@idPersonal", clsAcceso.idpersonal);
+            cmd.Parameters.AddWithValue("@Fecha", clsAcceso.fecha);
+            cmd.Parameters.AddWithValue("@FechaDesde", clsAcceso.fechadesde);
+            cmd.Parameters.AddWithValue("@FechaHasta", clsAcceso.fechahasta);
+            cmd.Parameters.AddWithValue("@Nota", clsAcceso.nota);
+             cmd.Parameters.AddWithValue("@Essalud", clsAcceso.essalud);
+            cmd.Parameters.AddWithValue("@sctrSalud", clsAcceso.sctrsalud);
+            cmd.Parameters.AddWithValue("@sctrPensiones", clsAcceso.sctrpensiones);
+            cmd.Parameters.AddWithValue("@pdtplame", clsAcceso.pdtplame);
+             cmd.Parameters.AddWithValue("@afp", clsAcceso.afp);
 
-                                                                 "VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}')",
-            clsAcceso.idpersonal, clsAcceso.fecha, clsAcceso.fechadesde, clsAcceso.fechahasta, clsAcceso.nota, clsAcceso.essalud, clsAcceso.sctrsalud, clsAcceso.sctrpensiones, clsAcceso.pdtplame, clsAcceso.afp, clsAcceso.onp, clsAcceso.idarea, clsAcceso.idtipopersonal, clsAcceso.idempresacolaboradora), cnx);
+             cmd.Parameters.AddWithValue("@onp", clsAcceso.onp);
 
-            retorno = comando.ExecuteNonQuery();
+             cmd.Parameters.AddWithValue("@idArea", clsAcceso.idarea);
+
+             cmd.Parameters.AddWithValue("@idTipoPersonal", clsAcceso.idtipopersonal);
+
+             cmd.Parameters.AddWithValue("@idEmpresaColaboradora", clsAcceso.idempresacolaboradora);
+
+             cnx.Open();
+
+            retorno = cmd.ExecuteNonQuery();
 
             cnx.Close();
+            retorno = 1;
             return retorno;
+        
         }
 
-        public static int ActualizarDatosdAcceso(Controlador.Acceso clsAcceso)
+
+
+
+
+
+
+      
+
+        public static int Actualizardatosdeacceso(Controlador.Acceso clsAcceso)
         {
+
             int retorno = 0;
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
 
-            MySqlCommand comando = new MySqlCommand(string.Format("UPDATE acceso SET  Fecha ='{0}' , FechaDesde ='{1}' , FechaHasta ='{2}' ,  Nota ='{3}' , Essalud ='{4}' , sctrSalud ='{5}' , sctrPensiones ='{6}' , pdtplame ='{7}' , afp ='{8}' , onp ='{9}' , idArea ='{10}' , idTipoPersonal ='{11}' , idEmpresaColaboradora ='{12}' " +
-                "WHERE idPersonal ='{13}' ",
-               clsAcceso.fecha, clsAcceso.fechadesde, clsAcceso.fechahasta, clsAcceso.nota, clsAcceso.essalud, clsAcceso.sctrsalud, clsAcceso.sctrpensiones, clsAcceso.pdtplame, clsAcceso.afp, clsAcceso.onp, clsAcceso.idarea, clsAcceso.idtipopersonal, clsAcceso.idempresacolaboradora, clsAcceso.idpersonal), cnx);
+            string query =
+            "UPDATE acceso SET  Fecha =@Fecha , FechaDesde =@FechaDesde , FechaHasta =@FechaHasta ,  Nota =@Nota , Essalud =@Essalud , sctrSalud =@sctrSalud , sctrPensiones =@sctrPensiones , pdtplame =@pdtplame , afp =@afp , onp =@onp , idArea =@idArea , idTipoPersonal =@idTipoPersonal , idEmpresaColaboradora =@idEmpresaColaboradora " +
+                "WHERE idPersonal =@idPersonal ";
+            SqlCommand cmd = new SqlCommand(query, cnx);
 
-            retorno = comando.ExecuteNonQuery();
+            cmd.Parameters.AddWithValue("@Fecha", clsAcceso.fecha);
+            cmd.Parameters.AddWithValue("@FechaDesde", clsAcceso.fechadesde);
+            cmd.Parameters.AddWithValue("@FechaHasta", clsAcceso.fechahasta);
+            cmd.Parameters.AddWithValue("@Nota", clsAcceso.nota);
+            cmd.Parameters.AddWithValue("@Essalud", clsAcceso.essalud);
+            cmd.Parameters.AddWithValue("@sctrSalud", clsAcceso.sctrsalud);
+            cmd.Parameters.AddWithValue("@sctrPensiones", clsAcceso.sctrpensiones);
+            cmd.Parameters.AddWithValue("@pdtplame", clsAcceso.pdtplame);
+            cmd.Parameters.AddWithValue("@afp", clsAcceso.afp);
+
+            cmd.Parameters.AddWithValue("@onp", clsAcceso.onp);
+
+            cmd.Parameters.AddWithValue("@idArea", clsAcceso.idarea);
+
+            cmd.Parameters.AddWithValue("@idTipoPersonal", clsAcceso.idtipopersonal);
+
+            cmd.Parameters.AddWithValue("@idEmpresaColaboradora", clsAcceso.idempresacolaboradora);
+            cmd.Parameters.AddWithValue("@idPersonal", clsAcceso.idpersonal);
+            cnx.Open();
+
+            retorno = cmd.ExecuteNonQuery();
+
             cnx.Close();
-
+            retorno = 1;
             return retorno;
 
         }
+
 
         public bool VerificarSiExisteIDacceso(string idPersonal)
         {
 
 
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
+            SqlCommand comando = new SqlCommand(string.Format("SELECT * FROM acceso WHERE idPersonal='{0}'", idPersonal), cnx);
 
-            MySqlCommand comando = new MySqlCommand(string.Format("SELECT * FROM acceso WHERE idPersonal='{0}'", idPersonal), cnx);
-
-            MySqlDataReader reader = comando.ExecuteReader();
+            SqlDataReader reader = comando.ExecuteReader();
 
             reader.Read();
             Boolean existeusuario = reader.HasRows;
@@ -113,3 +169,4 @@ namespace IDCheck.Modelo
         }
     }
 }
+

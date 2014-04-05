@@ -1,6 +1,6 @@
 ﻿namespace IDCheck.Vista
 {
-    partial class frmImprimirFotocheck
+    partial class frmImprimirFotocheckX
     {
         /// <summary>
         /// Required designer variable.
@@ -31,49 +31,49 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.dSpersonal = new Dataset.DSpersonal();
+            this.DSpersonal = new Vista.DSpersonal();
             this.personalBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personalTableAdapter = new Dataset.DSpersonalTableAdapters.personalTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.dSpersonal)).BeginInit();
+            this.personalTableAdapter = new Vista.DSpersonalTableAdapters.personalTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.DSpersonal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "DataSpersonas";
+            reportDataSource1.Name = "DataSetFOTOCHECK";
             reportDataSource1.Value = this.personalBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "IDCheck.Reportes.Report1.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "IDCheck.Vista.RPT_Fotocheck_X.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(905, 675);
+            this.reportViewer1.Size = new System.Drawing.Size(1058, 742);
             this.reportViewer1.TabIndex = 0;
             // 
-            // dSpersonal
+            // DSpersonal
             // 
-            this.dSpersonal.DataSetName = "DSpersonal";
-            this.dSpersonal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.DSpersonal.DataSetName = "DSpersonal";
+            this.DSpersonal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // personalBindingSource
             // 
             this.personalBindingSource.DataMember = "personal";
-            this.personalBindingSource.DataSource = this.dSpersonal;
+            this.personalBindingSource.DataSource = this.DSpersonal;
             // 
             // personalTableAdapter
             // 
             this.personalTableAdapter.ClearBeforeFill = true;
             // 
-            // frmImprimirFotocheck
+            // frmImprimirFotocheckX
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 675);
+            this.ClientSize = new System.Drawing.Size(1058, 742);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "frmImprimirFotocheck";
-            this.Text = "frmImprimirFotocheck";
-            this.Load += new System.EventHandler(this.frmImprimirFotocheck_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dSpersonal)).EndInit();
+            this.Name = "frmImprimirFotocheckX";
+            this.Text = "frmImprimirFotocheckX";
+            this.Load += new System.EventHandler(this.frmImprimirFotocheckX_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DSpersonal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -83,7 +83,7 @@
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.BindingSource personalBindingSource;
-        private Dataset.DSpersonal dSpersonal;
-        private Dataset.DSpersonalTableAdapters.personalTableAdapter personalTableAdapter;
+        private DSpersonal DSpersonal;
+        private DSpersonalTableAdapters.personalTableAdapter personalTableAdapter;
     }
 }

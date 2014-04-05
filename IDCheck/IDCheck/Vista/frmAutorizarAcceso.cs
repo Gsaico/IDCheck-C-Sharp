@@ -34,7 +34,7 @@ namespace IDCheck.Vista
             clsServidor = clsServidor_BD.FechayHoradelServidor();
          //   lblFecha.Text = DateTime.ToString("yyyyMMdd") ;
 
-            var dt = DateTime.Parse(clsServidor.datetimeservidor);
+            var dt = clsServidor.datetimeservidor;
             string output = dt.ToString(@"yyyy/MM/dd", CultureInfo.InvariantCulture);
             lblFecha.Text = output;
         }
@@ -111,6 +111,70 @@ namespace IDCheck.Vista
 
 
             }
+            //////////////
+
+
+
+
+
+            Modelo.Acceso_BD clsAccesobd = new Modelo.Acceso_BD();
+
+
+            if (clsAccesobd.VerificarSiExisteIDacceso(txtDNI.Text))
+                {
+                    //si existe el Id l  recupero los datos de l personal a mis controles
+                    Controlador.Acceso clsAcceso = new Controlador.Acceso();
+
+
+                    clsAcceso.idpersonal = txtDNI.Text;
+
+
+                    clsAcceso = clsAccesobd.BuscarAccesoXIDpersonal(clsAcceso);
+
+
+                    var dt = clsAcceso.fecha;
+                    string output = dt.ToString(@"yyyy/MM/dd", CultureInfo.InvariantCulture);
+                    lblFecha.Text = output;
+                                 
+ 
+                    this.dtpDesde.Value = clsAcceso.fechadesde;
+                    this.dtpHasta.Value = clsAcceso.fechahasta;
+                    this.txtRUC.Text = clsAcceso.idempresacolaboradora;
+
+                   this.cbxEssalud.Checked = (clsAcceso.essalud == "1" ? true : false);
+                    this.cbxSCTRsalud.Checked = (clsAcceso.sctrsalud == "1" ? true : false);
+                    this.cbxSCTRpensiones.Checked = ( clsAcceso.sctrpensiones == "1" ? true : false);
+                   this.cbdPDTplame.Checked =  (clsAcceso.pdtplame == "1" ? true : false);
+                    this.cbxAFP.Checked=  ( clsAcceso.afp == "1" ? true : false);
+                   this.cbxONP.Checked = (clsAcceso.onp  == "1" ? true : false);
+
+                   this.txtNota.Text = clsAcceso.nota;
+
+
+
+                   this.cmdTipoPersonal.SelectedIndex = (int.Parse(clsAcceso.idtipopersonal) - 1);
+
+
+                this.cmbArea.SelectedIndex= (int.Parse(clsAcceso.idarea) - 1);
+         
+                    
+
+
+                }
+
+                
+              
+
+
+            
+            ////////////
+
+
+
+
+
+
+
 
         }
 
@@ -172,18 +236,35 @@ namespace IDCheck.Vista
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (txtDNI.Text.Length == 8 && txtRUC.Text.Length == 11 )
+            {
+            
+      Modelo.PersonalBD clspersonalbd = new Modelo.PersonalBD();
+            Controlador.Personal clsPersonal = new Controlador.Personal();
+
+           
             Modelo.Acceso_BD clsAccesobd = new Modelo.Acceso_BD();
             Controlador.Acceso clsAcceso = new Controlador.Acceso();
 
-           
+            Controlador.Servidor clsSservidor = new Controlador.Servidor();
+            Modelo.Servidor_BD clsServidorBD = new Modelo.Servidor_BD();
+            clsSservidor = clsServidorBD.FechayHoradelServidor();
+
+            var dt = clsSservidor.datetimeservidor;
+            string output = dt.ToString(@"yyyy/MM/dd hh:mm:ss", CultureInfo.InvariantCulture);
+
+
+
                 if (clsAccesobd.VerificarSiExisteIDacceso(txtDNI.Text) == true)
                 {
                     //si existe actualizo datos de personal
 
                     clsAcceso.idpersonal = txtDNI.Text;
-                    clsAcceso.fecha = lblFecha.Text;
-                    clsAcceso.fechadesde = dtpDesde.Value.Year + "/" + dtpDesde.Value.Month + "/" + dtpDesde.Value.Day;
-                    clsAcceso.fechahasta = dtpHasta.Value.Year + "/" + dtpHasta.Value.Month + "/" + dtpHasta.Value.Day;
+                    clsAcceso.fecha = clsSservidor.datetimeservidor;
+
+                    lblFecha.Text = output;
+                    clsAcceso.fechadesde = dtpDesde.Value;
+                    clsAcceso.fechahasta = dtpHasta.Value;
                     clsAcceso.nota = txtNota.Text;
 
                     clsAcceso.essalud = (this.cbxEssalud.Checked == true ? "1" : "0");
@@ -206,7 +287,7 @@ namespace IDCheck.Vista
                     clsAcceso.idtipopersonal = Convert.ToString(this.cmdTipoPersonal.SelectedIndex+1);
 
 
-                    int resultado = Modelo.Acceso_BD.ActualizarDatosdAcceso(clsAcceso);
+                    int resultado = Modelo.Acceso_BD.Actualizardatosdeacceso(clsAcceso);
                     if (resultado > 0)
                     {
                         MessageBox.Show("La actualizacion se realizo con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -224,9 +305,16 @@ namespace IDCheck.Vista
                     // si no existe inserto el personal nuevo
 
                     clsAcceso.idpersonal = txtDNI.Text;
-                    clsAcceso.fecha = lblFecha.Text;
-                    clsAcceso.fechadesde = dtpDesde.Value.Year + "/" + dtpDesde.Value.Month + "/" + dtpDesde.Value.Day;
-                    clsAcceso.fechahasta = dtpHasta.Value.Year + "/" + dtpHasta.Value.Month + "/" + dtpHasta.Value.Day;
+                    clsAcceso.fecha = clsSservidor.datetimeservidor;
+
+                   
+                
+
+                   lblFecha.Text = output ;
+
+
+                    clsAcceso.fechadesde = dtpDesde.Value;
+                    clsAcceso.fechahasta = dtpHasta.Value;
                     clsAcceso.nota = txtNota.Text;
 
                     clsAcceso.essalud = (this.cbxEssalud.Checked == true ? "1" : "0");
@@ -244,7 +332,7 @@ namespace IDCheck.Vista
                     clsAcceso.idtipopersonal = Convert.ToString(this.cmdTipoPersonal.SelectedIndex + 1);
 
 
-                    int resultado = Modelo.Acceso_BD.AgregarDatosdAcceso(clsAcceso);
+                    int resultado = Modelo.Acceso_BD.insertardatosdeacceso(clsAcceso);
                     if (resultado > 0)
                     {
                         MessageBox.Show("Los datos del personal nuevo se Grabo Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -255,7 +343,12 @@ namespace IDCheck.Vista
                     }
 
                 }
-          
+            }
+            else
+            {
+
+                MessageBox.Show("Debe completar los datos para autorizar el acceso.", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
 
         }
@@ -265,6 +358,16 @@ namespace IDCheck.Vista
             MessageBox.Show(cmbArea.ValueMember);
 
            //Número = Int32.Parse(comboBox1.ValueMember);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //int cad= cmdTipoPersonal.SelectedValue.;
+
+         //   MessageBox.Show(.ToString);  
+
+         //   this.cmdTipoPersonal.Items.IndexOf(int.Parse (clsAcceso.idtipopersonal) - 1)
+
         }
 
         

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+
 
 namespace IDCheck.Modelo
 {
@@ -14,28 +15,31 @@ namespace IDCheck.Modelo
         {
 
 
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
 
-            MySqlCommand comando = new MySqlCommand(string.Format("select * from administrador  where idPersonal='{0}'and Pasword='{1}'", dni, pasword), cnx);
-                       
-            MySqlDataReader reader = comando.ExecuteReader();
-                          
+            SqlCommand comando = new SqlCommand(string.Format("select * from administrador  where idPersonal='{0}'and Pasword='{1}'", dni, pasword), cnx);
+
+            SqlDataReader reader = comando.ExecuteReader();
+
             reader.Read();
             Boolean existeusuario = reader.HasRows;
 
             cnx.Close();
 
             if (existeusuario == true)
-            { 
-                
-                return true; 
-               }
-                
-            else { 
-                
-                return false; }
+            {
 
-            
+                return true;
+            }
+
+            else
+            {
+
+                return false;
+            }
+
+
 
         }
 
@@ -43,11 +47,12 @@ namespace IDCheck.Modelo
         {
 
 
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
 
-            MySqlCommand comando = new MySqlCommand("select * from administrador", cnx);
+            SqlCommand comando = new SqlCommand("select * from administrador", cnx);
 
-            MySqlDataReader reader = comando.ExecuteReader();
+            SqlDataReader reader = comando.ExecuteReader();
 
             reader.Read();
             Boolean existenusuarios = reader.HasRows;
@@ -72,3 +77,4 @@ namespace IDCheck.Modelo
 
     }
 }
+

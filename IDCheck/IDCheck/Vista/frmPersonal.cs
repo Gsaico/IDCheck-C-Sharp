@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 
 using System.Collections;
+using System.Data.SqlClient;
 
 
 namespace IDCheck.Vista
@@ -39,11 +40,11 @@ namespace IDCheck.Vista
                     clsPersonal.idpersonal = txtDNI.Text.Trim();
                     clsPersonal.nombres = txtNombres.Text.Trim();
                     clsPersonal.apellidos = txtApellidos.Text.Trim();
-                    clsPersonal.fechanac = dtpFechaNacimiento.Value.Year + "/" + dtpFechaNacimiento.Value.Month + "/" + dtpFechaNacimiento.Value.Day;
+                    clsPersonal.fechanac = dtpFechaNacimiento.Value;
                     clsPersonal.cargo = txtcargo.Text.Trim();
                     clsPersonal.foto = tempfoto;
 
-                    int resultado = Modelo.PersonalBD.ActualizarDatosdPersonal(clsPersonal);
+                    int resultado = Modelo.PersonalBD.ActualizarDatosdelPersonal(clsPersonal);
                     if (resultado > 0)
                     {
                         MessageBox.Show("La actualizacion se realizo con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -64,11 +65,11 @@ namespace IDCheck.Vista
                     clsPersonal.idpersonal = txtDNI.Text.Trim();
                     clsPersonal.nombres = txtNombres.Text.Trim();
                     clsPersonal.apellidos = txtApellidos.Text.Trim();
-                    clsPersonal.fechanac = dtpFechaNacimiento.Value.Year + "/" + dtpFechaNacimiento.Value.Month + "/" + dtpFechaNacimiento.Value.Day;
+                    clsPersonal.fechanac = dtpFechaNacimiento.Value;
                     clsPersonal.cargo = txtcargo.Text.Trim();
                     clsPersonal.foto = tempfoto;
 
-                    int resultado = Modelo.PersonalBD.AgregarDatosdPersonal(clsPersonal);
+                    int resultado = Modelo.PersonalBD.InsertarDatosdelPersonal(clsPersonal);
                     if (resultado > 0)
                     {
                         MessageBox.Show("Los datos del personal nuevo se Grabo Con Exito!!", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -118,8 +119,11 @@ namespace IDCheck.Vista
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Vista.frmImprimirFotocheck frmreportex = new Vista.frmImprimirFotocheck(txtDNI.Text);
+            Vista.frmImprimirFotocheckX frmreportex = new Vista.frmImprimirFotocheckX(txtDNI.Text);
             frmreportex.Show();
+
+            
+
 
         }
 
@@ -203,20 +207,13 @@ namespace IDCheck.Vista
 
                     txtNombres.Text = clsPersonal.nombres;
                     txtApellidos.Text = clsPersonal.apellidos;
-                    dtpFechaNacimiento.Text = clsPersonal.fechanac;
+                    dtpFechaNacimiento.Value = clsPersonal.fechanac;
                     txtcargo.Text = clsPersonal.cargo;
 
+                    
                     picFoto.Image = byteArrayToImage(clsPersonal.foto);
-                    // coloca la fot en la variable temfoto para su actualizacion
+                
                     tempfoto = imageToByteArray(picFoto.Image);
-
-                    // MemoryStream stream = new MemoryStream(clsPersonal.foto);
-                    // picFoto.Image = Image.FromStream(stream);
-
-
-
-
-
 
 
                 }
@@ -242,69 +239,71 @@ namespace IDCheck.Vista
             txtDNI.Focus();
         }
 
-       // private void txtDNI_Validating(object sender, CancelEventArgs e)
-       // {
-           // if (txtDNI.Text.Length == 0)
-          //  {
-         //       e.Cancel = true;
-         //       this.errorProvider1.SetError(this.txtDNI, "Ingrese el DNI del Colaborador.");
-         //   }
-         //   else
-         //   {
-          //      this.errorProvider1.SetError(this.txtDNI, null);
-         //   }
-      //  }
+        //private void txtDNI_Validating(object sender, CancelEventArgs e)
+        //{
+        //    if (txtDNI.Text.Length == 0)
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(this.txtDNI, "Ingrese el DNI del Colaborador.");
+        //    }
+        //    else
+        //    {
+        //        this.errorProvider1.SetError(this.txtDNI, null);
+        //    }
+        //}
 
-        private void txtNombres_Validating(object sender, CancelEventArgs e)
-        {
-            if (txtNombres.Text.Length == 0)
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(this.txtNombres, "Ingrese el Nombre del Colaborador.");
-            }
-            else
-            {
-                this.errorProvider1.SetError(this.txtNombres, null);
-            }
-        }
+        //private void txtNombres_Validating(object sender, CancelEventArgs e)
+        //{
+        //    if (txtNombres.Text.Length == 0)
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(this.txtNombres, "Ingrese el Nombre del Colaborador.");
+        //    }
+        //    else
+        //    {
+        //        this.errorProvider1.SetError(this.txtNombres, null);
+        //    }
+        //}
 
-        private void txtApellidos_Validating(object sender, CancelEventArgs e)
-        {
-            if (txtApellidos.Text.Length == 0)
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(this.txtApellidos, "Ingrese el Apellido del Colaborador.");
-            }
-            else
-            {
-                this.errorProvider1.SetError(this.txtApellidos, null);
-            }
-        }
+        //private void txtApellidos_Validating(object sender, CancelEventArgs e)
+        //{
+        //    if (txtApellidos.Text.Length == 0)
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(this.txtApellidos, "Ingrese el Apellido del Colaborador.");
+        //    }
+        //    else
+        //    {
+        //        this.errorProvider1.SetError(this.txtApellidos, null);
+        //    }
+        //}
 
-        private void dtpFechaNacimiento_Validating(object sender, CancelEventArgs e)
-        {
-            if (dtpFechaNacimiento.Text.Length == 0)
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(this.dtpFechaNacimiento, "Ingrese la Fecha de Nacimiento del Colaborador. ");
-            }
-            else
-            {
-                this.errorProvider1.SetError(this.dtpFechaNacimiento, null);
-            }
-        }
+        //private void dtpFechaNacimiento_Validating(object sender, CancelEventArgs e)
+        //{
+        //    if (dtpFechaNacimiento.Text.Length == 0)
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(this.dtpFechaNacimiento, "Ingrese la Fecha de Nacimiento del Colaborador. ");
+        //    }
+        //    else
+        //    {
+        //        this.errorProvider1.SetError(this.dtpFechaNacimiento, null);
+        //    }
+        //}
 
-        private void txtcargo_Validating(object sender, CancelEventArgs e)
-        {
-            if (txtcargo.Text.Length == 0)
-            {
-                e.Cancel = true;
-                this.errorProvider1.SetError(this.txtcargo, "Ingrese el cargo que desempeña el Colaborador. ");
-            }
-            else
-            {
-                this.errorProvider1.SetError(this.txtcargo, null);
-            }
-        }
+        //private void txtcargo_Validating(object sender, CancelEventArgs e)
+        //{
+        //    if (txtcargo.Text.Length == 0)
+        //    {
+        //        e.Cancel = true;
+        //        this.errorProvider1.SetError(this.txtcargo, "Ingrese el cargo que desempeña el Colaborador. ");
+        //    }
+        //    else
+        //    {
+        //        this.errorProvider1.SetError(this.txtcargo, null);
+        //    }
+        //}
+
+       
     }
 }

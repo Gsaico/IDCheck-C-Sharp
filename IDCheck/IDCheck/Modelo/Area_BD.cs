@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+
 
 namespace IDCheck.Modelo
 {
@@ -16,19 +17,20 @@ namespace IDCheck.Modelo
         {
 
 
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
             DataTable dt = new DataTable();
 
-            MySqlCommand comando = new MySqlCommand(
+            SqlCommand comando = new SqlCommand(
            "SELECT idArea, NombreArea FROM area", cnx);
             comando.ExecuteNonQuery();
-                        
-            MySqlDataAdapter adap = new MySqlDataAdapter(comando);
+
+            SqlDataAdapter adap = new SqlDataAdapter(comando);
             adap.Fill(dt);
             cnx.Close();
             return dt;
 
-            
+
 
         }
 
@@ -36,10 +38,10 @@ namespace IDCheck.Modelo
         {
 
             int retorno = 0;
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
-
-            MySqlCommand comando = new MySqlCommand(string.Format("INSERT INTO area(idArea, NombreArea) VALUES('{0}','{1}')",
-             clsArea.idarea , clsArea.nombrearea), cnx);
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
+            SqlCommand comando = new SqlCommand(string.Format("INSERT INTO area(idArea, NombreArea) VALUES('{0}','{1}')",
+             clsArea.idarea, clsArea.nombrearea), cnx);
 
             retorno = comando.ExecuteNonQuery();
 
@@ -52,11 +54,11 @@ namespace IDCheck.Modelo
         {
 
 
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
+            SqlCommand comando = new SqlCommand(string.Format("SELECT * FROM area WHERE NombreArea='{0}'", NombreArea), cnx);
 
-            MySqlCommand comando = new MySqlCommand(string.Format("SELECT * FROM area WHERE NombreArea='{0}'", NombreArea), cnx);
-
-            MySqlDataReader reader = comando.ExecuteReader();
+            SqlDataReader reader = comando.ExecuteReader();
 
             reader.Read();
             Boolean existeusuario = reader.HasRows;
@@ -83,11 +85,11 @@ namespace IDCheck.Modelo
             int id = 0;
 
 
-            MySqlConnection cnx = Conexion.Conexion.ObtenerConexion();
-
-            MySqlCommand comando = new MySqlCommand(
-           "SELECT * FROM area order by idArea desc  limit 1", cnx);
-            MySqlDataReader reader = comando.ExecuteReader();
+            SqlConnection cnx = Conexion.Conexion.ObtenerConexion();
+            cnx.Open();
+            SqlCommand comando = new SqlCommand(
+           "SELECT TOP (1) * FROM area order by idArea desc", cnx);
+            SqlDataReader reader = comando.ExecuteReader();
 
             while (reader.Read())
             {

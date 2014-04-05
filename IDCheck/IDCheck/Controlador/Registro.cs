@@ -11,7 +11,7 @@ namespace IDCheck.Controlador
       
 
 public String idRegistro { get; set; }
-public String Fechayhora { get; set; }
+public DateTime  Fechayhora { get; set; }
 public String idEstado { get; set; }
 public String idTipoPersonal { get; set; }
 public String idEmpresaColaboradora { get; set; }
@@ -25,7 +25,7 @@ public String idAcceso { get; set; }
         }
 
 
-        public Registro(String idRegistro, String Fechayhora, String idEstado, String idTipoPersonal, String idEmpresaColaboradora, String idAcceso)
+        public Registro(String idRegistro, DateTime Fechayhora, String idEstado, String idTipoPersonal, String idEmpresaColaboradora, String idAcceso)
         {
          this.idRegistro=idRegistro;
 this.Fechayhora=Fechayhora;

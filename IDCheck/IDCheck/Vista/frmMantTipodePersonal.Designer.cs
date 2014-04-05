@@ -52,7 +52,6 @@
             this.txtTipoPersonal.Name = "txtTipoPersonal";
             this.txtTipoPersonal.Size = new System.Drawing.Size(217, 20);
             this.txtTipoPersonal.TabIndex = 1;
-           // this.txtTipoPersonal.TextChanged += new System.EventHandler(this.txtTipoPersonal);
             // 
             // label1
             // 
@@ -62,7 +61,6 @@
             this.label1.Size = new System.Drawing.Size(90, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Tipo de Personal:";
-           // this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dataGridViewTipoPersonal
             // 
@@ -71,12 +69,12 @@
             this.dataGridViewTipoPersonal.Name = "dataGridViewTipoPersonal";
             this.dataGridViewTipoPersonal.Size = new System.Drawing.Size(391, 289);
             this.dataGridViewTipoPersonal.TabIndex = 3;
-          //  this.dataGridViewTipoPersonal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTipoPersonal_CellContentClick);
             // 
             // frmMantTipodePersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(423, 375);
             this.Controls.Add(this.dataGridViewTipoPersonal);
             this.Controls.Add(this.label1);

@@ -68,7 +68,11 @@
     <Compile Include="Controlador\Registro.cs" />
     <Compile Include="Controlador\Servidor.cs" />
     <Compile Include="Controlador\TipoPersonal.cs" />
-    <Compile Include="Dataset\DSpersonal.Designer.cs">
+    <Compile Include="Vista\DSpersonal.cs">
+      <DependentUpon>DSpersonal.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Vista\DSpersonal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DSpersonal.xsd</DependentUpon>
@@ -115,11 +119,11 @@
     <Compile Include="Vista\frmEmpresas.Designer.cs">
       <DependentUpon>frmEmpresas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vista\frmImprimirFotocheck.cs">
+    <Compile Include="Vista\frmImprimirFotocheckX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vista\frmImprimirFotocheck.Designer.cs">
-      <DependentUpon>frmImprimirFotocheck.cs</DependentUpon>
+    <Compile Include="Vista\frmImprimirFotocheckX.Designer.cs">
+      <DependentUpon>frmImprimirFotocheckX.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmMantArea.cs">
       <SubType>Form</SubType>
@@ -167,7 +171,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reportes\Report1.rdlc" />
     <EmbeddedResource Include="Vista\frmAdministrador.resx">
       <DependentUpon>frmAdministrador.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,8 +186,8 @@
     <EmbeddedResource Include="Vista\frmEmpresas.resx">
       <DependentUpon>frmEmpresas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vista\frmImprimirFotocheck.resx">
-      <DependentUpon>frmImprimirFotocheck.cs</DependentUpon>
+    <EmbeddedResource Include="Vista\frmImprimirFotocheckX.resx">
+      <DependentUpon>frmImprimirFotocheckX.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmMantArea.resx">
       <DependentUpon>frmMantArea.cs</DependentUpon>
@@ -204,16 +207,17 @@
     <EmbeddedResource Include="Vista\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\RPT_Fotocheck_X.rdlc" />
     <None Include="Controlador\arduinoverde_rojo.ino" />
-    <None Include="Dataset\DSpersonal.xsc">
+    <None Include="Vista\DSpersonal.xsc">
       <DependentUpon>DSpersonal.xsd</DependentUpon>
     </None>
-    <None Include="Dataset\DSpersonal.xsd">
+    <None Include="Vista\DSpersonal.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DSpersonal.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Dataset\DSpersonal.xss">
+    <None Include="Vista\DSpersonal.xss">
       <DependentUpon>DSpersonal.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
@@ -246,6 +250,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dataset\" />
+    <Folder Include="Reportes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -143,7 +143,7 @@ namespace IDCheck.Vista
                             clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
                             clsRegistrox.idAcceso = clsLogicaacceso.dni;
                             clsRegistrox.idEstado = "0";
-                            Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+                            Modelo.Registro_BD.insertarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
 
                       
 
@@ -162,7 +162,7 @@ namespace IDCheck.Vista
                             clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
                             clsRegistrox.idAcceso = clsLogicaacceso.dni;
                             clsRegistrox.idEstado = "1";
-                            Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+                            Modelo.Registro_BD.insertarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
 
                             contadorgrid++;
 
@@ -176,7 +176,7 @@ namespace IDCheck.Vista
                             clsRegistrox.idEmpresaColaboradora = clsLogicaacceso.idEmpresaColaboradora;
                             clsRegistrox.idAcceso = clsLogicaacceso.dni;
                             clsRegistrox.idEstado = "1";
-                            Modelo.Registro_BD.GrabarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
+                            Modelo.Registro_BD.insertarAcceso(clsRegistrox);//retorna 1 si se guardo correctamente
                             contadorgrid++;
 
                             dataGridView1.Rows.Add(contadorgrid, byteArrayToImage(clsLogicaacceso.foto), clsLogicaacceso.apellidos + " " + clsLogicaacceso.nombres, clsLogicaacceso.dni);

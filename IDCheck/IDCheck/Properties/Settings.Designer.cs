@@ -53,5 +53,26 @@ namespace IDCheck.Properties {
                 return ((string)(this["id_check_dbConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;password=12345;database=id_check_db")]
+        public string id_check_dbConnectionString1 {
+            get {
+                return ((string)(this["id_check_dbConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PERVAC-PC\\MSSQLSERVERX;Initial Catalog=id_check_db;Integrated Securit" +
+            "y=True")]
+        public string id_check_dbConnectionString2 {
+            get {
+                return ((string)(this["id_check_dbConnectionString2"]));
+            }
+        }
     }
 }

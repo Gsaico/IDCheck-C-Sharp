@@ -58,6 +58,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lblDNI = new System.Windows.Forms.Label();
             this.lblRUC = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -134,6 +135,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.cbxONP);
             this.groupBox2.Controls.Add(this.cbxAFP);
             this.groupBox2.Controls.Add(this.cbdPDTplame);
@@ -270,6 +272,7 @@
             // 
             // dtpDesde
             // 
+            this.dtpDesde.CalendarMonthBackground = System.Drawing.Color.LightSalmon;
             this.dtpDesde.Location = new System.Drawing.Point(93, 89);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(200, 20);
@@ -277,6 +280,7 @@
             // 
             // dtpHasta
             // 
+            this.dtpHasta.CalendarMonthBackground = System.Drawing.Color.LightSalmon;
             this.dtpHasta.Location = new System.Drawing.Point(93, 119);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(200, 20);
@@ -378,10 +382,21 @@
             this.lblRUC.TabIndex = 7;
             this.lblRUC.Text = "...";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(296, 63);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // frmAutorizarAcceso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(855, 691);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnNuevo);
@@ -435,5 +450,6 @@
         private System.Windows.Forms.Label lblRUC;
         private System.Windows.Forms.MaskedTextBox txtRUC;
         private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Button button1;
     }
 }

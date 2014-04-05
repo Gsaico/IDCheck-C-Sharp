@@ -9,9 +9,9 @@ namespace IDCheck.Controlador
     class Acceso
     {
     public String idpersonal { get; set; }
-    public String fecha { get; set; }
-    public String fechadesde { get; set; }
-    public String fechahasta { get; set; }
+    public DateTime fecha { get; set; }
+    public DateTime fechadesde { get; set; }
+    public DateTime fechahasta { get; set; }
     public String nota { get; set; }
     public String essalud { get; set; }
     public String sctrsalud { get; set; }
@@ -40,7 +40,7 @@ namespace IDCheck.Controlador
         }
 
 
-        public Acceso(String idpersonal, String fecha, String fechadesde, String fechahasta, String nota,
+        public Acceso(String idpersonal, DateTime fecha, DateTime fechadesde, DateTime fechahasta, String nota,
          String essalud, String sctrsalud, String sctrpensiones, String pdtplame, String afp, String onp,
          String idarea, String idempresacolaboradora, String idtipopersonal)
         {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+
 
 namespace IDCheck.Conexion
 {
@@ -11,11 +12,14 @@ namespace IDCheck.Conexion
     {
 
 
-        public static MySqlConnection ObtenerConexion()
+        public static SqlConnection ObtenerConexion()
         {
-            MySqlConnection conectar = new MySqlConnection("server=127.0.0.1; database=id_check_db; Uid=root; pwd=12345;");
+            SqlConnection conectar = new SqlConnection(@"Server=PERVAC-PC\MSSQLSERVERX;database=id_check_db;integrated security=true");
 
-            conectar.Open();
+
+            
+
+           
             return conectar;
         }
     }
