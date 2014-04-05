@@ -65,5 +65,11 @@ namespace IDCheck.Vista
 
             }
         }
+
+        private void frmAgregarUsuario_Load(object sender, EventArgs e)
+        {
+            txtDNI.Select();
+            txtDNI.Focus();
+        }
     }
 }

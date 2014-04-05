@@ -66,6 +66,7 @@
             // txtDNI
             // 
             this.txtDNI.Location = new System.Drawing.Point(86, 22);
+            this.txtDNI.MaxLength = 8;
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(100, 20);
             this.txtDNI.TabIndex = 3;
@@ -73,6 +74,7 @@
             // txtPasword
             // 
             this.txtPasword.Location = new System.Drawing.Point(86, 48);
+            this.txtPasword.MaxLength = 50;
             this.txtPasword.Name = "txtPasword";
             this.txtPasword.Size = new System.Drawing.Size(100, 20);
             this.txtPasword.TabIndex = 4;
@@ -90,6 +92,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Name = "frmAgregarUsuario";
             this.Text = "frmAgregarUsuario";
+            this.Load += new System.EventHandler(this.frmAgregarUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

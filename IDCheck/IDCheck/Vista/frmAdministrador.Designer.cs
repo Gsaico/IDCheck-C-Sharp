@@ -30,13 +30,13 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDNI = new System.Windows.Forms.MaskedTextBox();
             this.pnlNuevaCuenta = new System.Windows.Forms.Panel();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.pnlNuevaCuenta.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,26 +57,6 @@
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Contraseña";
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnGuardar.Image = global::IDCheck.Properties.Resources.document_save_as;
-            this.btnGuardar.Location = new System.Drawing.Point(11, 124);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(41, 34);
-            this.btnGuardar.TabIndex = 9;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnNuevo.Image = global::IDCheck.Properties.Resources.add;
-            this.btnNuevo.Location = new System.Drawing.Point(58, 124);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(41, 34);
-            this.btnNuevo.TabIndex = 10;
-            this.btnNuevo.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
@@ -124,6 +104,26 @@
             this.pnlNuevaCuenta.Size = new System.Drawing.Size(265, 213);
             this.pnlNuevaCuenta.TabIndex = 15;
             // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnNuevo.Image = global::IDCheck.Properties.Resources.add;
+            this.btnNuevo.Location = new System.Drawing.Point(58, 124);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(41, 34);
+            this.btnNuevo.TabIndex = 10;
+            this.btnNuevo.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGuardar.Image = global::IDCheck.Properties.Resources.document_save_as;
+            this.btnGuardar.Location = new System.Drawing.Point(11, 124);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(41, 34);
+            this.btnGuardar.TabIndex = 9;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            // 
             // frmAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,6 +134,7 @@
             this.Name = "frmAdministrador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAdministrador";
+            this.Load += new System.EventHandler(this.frmAdministrador_Load);
             this.pnlNuevaCuenta.ResumeLayout(false);
             this.pnlNuevaCuenta.PerformLayout();
             this.ResumeLayout(false);

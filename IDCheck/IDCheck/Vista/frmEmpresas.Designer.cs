@@ -179,6 +179,7 @@
             this.Controls.Add(this.txtRUC);
             this.Name = "frmEmpresas";
             this.Text = "frmEmpresas";
+            this.Load += new System.EventHandler(this.frmEmpresas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -163,5 +163,11 @@ namespace IDCheck.Vista
         {
 
         }
+
+        private void frmEmpresas_Load(object sender, EventArgs e)
+        {
+            txtRUC.Select();
+            txtRUC.Focus();
+        }
     }
 }

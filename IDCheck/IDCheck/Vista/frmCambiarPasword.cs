@@ -75,7 +75,8 @@ namespace IDCheck.Vista
 
         private void frmCambiarPasword_Load(object sender, EventArgs e)
         {
-
+            txtActual.Select();
+            txtActual.Focus();
         }
     }
 }

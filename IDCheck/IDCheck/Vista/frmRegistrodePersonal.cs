@@ -45,7 +45,10 @@ namespace IDCheck.Vista
         int contadorgrid;
         private void frmRegistrodePersonal_Load(object sender, EventArgs e)
         {
-           // dt = new DataTable();
+            txtDNI.Select();
+            txtDNI.Focus();
+            
+            // dt = new DataTable();
 
             //creas una tabla 
           //  dt.Columns.Add("Apellido y Nombre"); //le creas las columnas 

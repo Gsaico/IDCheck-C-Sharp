@@ -23,7 +23,8 @@ namespace IDCheck.Vista
   
         
             dataGridViewTipoPersonal.DataSource = clsTipoPersonalBD.CargarTipopersonal ();
-
+            txtTipoPersonal.Select();
+            txtTipoPersonal.Focus();
       
         }
 

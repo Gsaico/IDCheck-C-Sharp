@@ -41,19 +41,23 @@
             this.cuentaDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarNuevoUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackgroundImage = global::IDCheck.Properties.Resources.Untitled5;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.personalToolStripMenuItem,
             this.accesoToolStripMenuItem,
             this.mantenimientoToolStripMenuItem,
-            this.cuentaDeUsuarioToolStripMenuItem});
+            this.cuentaDeUsuarioToolStripMenuItem,
+            this.salirToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(990, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(990, 46);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -61,8 +65,10 @@
             // 
             this.personalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actualizarPersonalToolStripMenuItem});
+            this.personalToolStripMenuItem.Image = global::IDCheck.Properties.Resources.cm_hdr_wiz_copy__1600x1200_;
+            this.personalToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
-            this.personalToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.personalToolStripMenuItem.Size = new System.Drawing.Size(98, 42);
             this.personalToolStripMenuItem.Text = "Personal";
             // 
             // actualizarPersonalToolStripMenuItem
@@ -77,8 +83,9 @@
             this.accesoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.autorizarAccesoToolStripMenuItem,
             this.registroToolStripMenuItem});
+            this.accesoToolStripMenuItem.Image = global::IDCheck.Properties.Resources.timer__1600x1200_;
             this.accesoToolStripMenuItem.Name = "accesoToolStripMenuItem";
-            this.accesoToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.accesoToolStripMenuItem.Size = new System.Drawing.Size(89, 42);
             this.accesoToolStripMenuItem.Text = "Acceso";
             // 
             // autorizarAccesoToolStripMenuItem
@@ -101,8 +108,9 @@
             this.tipoDePersonalToolStripMenuItem,
             this.areaToolStripMenuItem,
             this.empresasToolStripMenuItem});
+            this.mantenimientoToolStripMenuItem.Image = global::IDCheck.Properties.Resources.Repair__1600x1200_;
             this.mantenimientoToolStripMenuItem.Name = "mantenimientoToolStripMenuItem";
-            this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(133, 42);
             this.mantenimientoToolStripMenuItem.Text = "Mantenimiento";
             // 
             // tipoDePersonalToolStripMenuItem
@@ -131,8 +139,9 @@
             this.cuentaDeUsuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cambiarContraseñaToolStripMenuItem,
             this.agregarNuevoUsuarioToolStripMenuItem});
+            this.cuentaDeUsuarioToolStripMenuItem.Image = global::IDCheck.Properties.Resources.ico_alpha_Keys_32x32__1600x1200_;
             this.cuentaDeUsuarioToolStripMenuItem.Name = "cuentaDeUsuarioToolStripMenuItem";
-            this.cuentaDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.cuentaDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(148, 42);
             this.cuentaDeUsuarioToolStripMenuItem.Text = "Cuenta de Usuario";
             // 
             // cambiarContraseñaToolStripMenuItem
@@ -148,6 +157,13 @@
             this.agregarNuevoUsuarioToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.agregarNuevoUsuarioToolStripMenuItem.Text = "Agregar Nuevo Usuario";
             this.agregarNuevoUsuarioToolStripMenuItem.Click += new System.EventHandler(this.agregarNuevoUsuarioToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Image = global::IDCheck.Properties.Resources.exit__1600x1200_;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(73, 42);
+            this.salirToolStripMenuItem.Text = "Salir";
             // 
             // IDCheck
             // 
@@ -184,5 +200,6 @@
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarNuevoUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem empresasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
     }
 }

@@ -16,5 +16,11 @@ namespace IDCheck.Vista
         {
             InitializeComponent();
         }
+
+        private void frmAdministrador_Load(object sender, EventArgs e)
+        {
+            txtDNI.Select();
+            txtDNI.Focus();
+        }
     }
 }

@@ -60,6 +60,9 @@ namespace IDCheck.Vista
 
 
             dataGridViewArea.DataSource = clsAreaBD.CargarArea();
+
+            txtArea.Select();
+            txtArea.Focus();
         }
     }
 }
